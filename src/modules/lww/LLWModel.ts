@@ -23,15 +23,16 @@ export class LWWModel extends Observable<'change'> {
             this.lww.merge(state);
         });
 
-        // 这个可能在Merger之后触发
         this.lww.on('change', (value, state) => {
             this.lastState = state;
             this.emit('change', value, state);
         });
     }
 
-    // 本地更新方法
-    set(value: string) {
+    // 对外暴露的更新方法
+    set(value: string, timeout = 0) {
         this.lww.set(value);
+        // 通过ms广播出去
+        this.ms.send(this.lww.state, timeout);
     }
 }

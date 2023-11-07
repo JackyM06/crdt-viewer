@@ -1,4 +1,5 @@
 import { Observable } from './observable';
+import { sleep } from './utils';
 
 export class MessageSocket<T> extends Observable<'data'> {
     bc: BroadcastChannel;
@@ -20,7 +21,8 @@ export class MessageSocket<T> extends Observable<'data'> {
         });
     }
 
-    send(payload: T) {
+    async send(payload: T, timeout = 0) {
+        await sleep(timeout);
         this.bc.postMessage({
             id: this.id,
             payload

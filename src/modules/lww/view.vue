@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import LLWItem from './LLWItem.vue';
+
+const delay = ref(100);
 </script>
 
 <template>
     <h2>CRDT: LWW Register</h2>
 
     <div>
+        <div>
+            <el-slider v-model="delay" />
+        </div>
         <div class="content">
             <LLWItem name="alice"></LLWItem>
             <LLWItem name="Bob"></LLWItem>

@@ -17,6 +17,10 @@ const viewValue = ref(model.lww.value);
 
 const viewState = ref(model.lww.state);
 
+const emit = defineEmits<{
+    (e: 'input', value: string): void;
+}>();
+
 const logger = ref<{ message: string; time: number }[]>([]);
 
 const addLogger = (message: string) => {
@@ -46,12 +50,13 @@ watch(
 const set = (value: string) => {
     addLogger(`主动修改: ${model.lww.value} => ${value}`);
     model.set(value, props.delay);
+    emit('input', value);
 };
 </script>
 
 <template>
     <div class="llw-item">
-        <DataCard :name="name">
+        <DataCard :name="name" class="card">
             <div class="header">
                 <div class="name">{{ viewState.peer }}</div>
                 <div class="clock">{{ viewState.clock }}</div>
@@ -66,7 +71,7 @@ const set = (value: string) => {
                 class="item"
             >
                 <span>{{ message }}</span>
-                <span>{{ dayjs(time).format('HH:mm:ss-SSS') }}</span>
+                <span>{{ dayjs(time).format('HH:mm:ss.SSS') }}</span>
             </div>
         </div>
     </div>
@@ -80,7 +85,7 @@ const set = (value: string) => {
 }
 
 .logger-panel {
-    min-width: 300px;
+    // min-width: 300px;
     margin-top: 30px;
     color: #666;
     font-size: 14px;
@@ -94,8 +99,7 @@ const set = (value: string) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 300px;
-    margin-right: 300px;
+    // min-width: 300px;
 }
 
 .content {

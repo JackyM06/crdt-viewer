@@ -1,24 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { Camp } from './animation';
+import { Animation } from './animation';
 
 const viewEl = ref<HTMLDivElement>();
 
-function importSoldier(camp: Camp, name: string, duration: number) {
-    console.log(
-        '🚀 ~ file: view.vue:6 ~ importSoldier ~ name:',
-        camp,
-        name,
-        duration
-    );
-}
+const animation = new Animation();
 
 onMounted(() => {
-    // 初始化一下动画
+    if (viewEl.value) {
+        animation.start(viewEl.value);
+    }
 });
 
 defineExpose({
-    importSoldier
+    importSoldier: animation.importText
 });
 </script>
 

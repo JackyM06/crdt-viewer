@@ -11,27 +11,14 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;
 }>();
 
-watch(
-    () => props.modelValue,
-    () => {
-        input.value = props.modelValue;
-    },
-    {
-        immediate: true
-    }
-);
-
-watch(
-    () => input.value,
-    () => {
-        emit('update:modelValue', input.value);
-    }
-);
+const onInput = (e: any) => {
+    emit('update:modelValue', e.target.value);
+};
 </script>
 
 <template>
     <div class="input-container">
-        <input type="text" v-model="input" />
+        <input type="text" :value="props.modelValue" @input="onInput" />
     </div>
 </template>
 

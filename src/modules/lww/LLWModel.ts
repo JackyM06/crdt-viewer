@@ -13,7 +13,8 @@ export class LWWModel extends Observable<'change'> {
         super();
         this.lww = new LWWRegister(id, {
             peer: id,
-            timestamp: 1,
+            timestamp: Date.now(),
+            clock: 1,
             value: ''
         });
 

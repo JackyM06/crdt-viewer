@@ -7,7 +7,7 @@ const props = defineProps<{
 <template>
     <div>
         <div class="title">
-            ID:
+            <span class="id">ID:</span>
             <span class="name">
                 {{ props.name }}
             </span>
@@ -22,6 +22,10 @@ const props = defineProps<{
 .title {
     color: #675c9c;
     text-align: left;
+    .id {
+        opacity: 0.6;
+    }
+
     .name {
         font-weight: bolder;
     }

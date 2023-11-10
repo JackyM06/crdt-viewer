@@ -23,6 +23,6 @@ defineExpose({
 
 <style scoped lang="less">
 .view {
-    background: #e7e7e7;
+    background: #fff;
 }
 </style>

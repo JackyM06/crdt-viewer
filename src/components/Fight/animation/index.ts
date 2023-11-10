@@ -24,10 +24,7 @@ export class Animation {
 
     private resize(parent: HTMLDivElement) {
         this.app.renderer.resize(parent.clientWidth, parent.clientHeight);
-        this.app.stage.scale.set(
-            parent.clientWidth / 828,
-            parent.clientWidth / 828
-        );
+        this.app.stage.scale.set(parent.clientWidth, parent.clientWidth);
     }
 
     public async start(parent: HTMLDivElement) {

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
     modelValue: string;
+    label?: string;
 }>();
 
 const input = ref(props.modelValue);
@@ -18,6 +19,7 @@ const onInput = (e: any) => {
 
 <template>
     <div class="input-container">
+        <span v-if="label" class="label">{{ label }}</span>
         <input type="text" :value="props.modelValue" @input="onInput" />
     </div>
 </template>
@@ -25,6 +27,12 @@ const onInput = (e: any) => {
 <style scoped lang="less">
 .input-container {
     display: flex;
+    align-items: center;
+    .label {
+        margin-right: 10px;
+        color: #241969cd;
+        font-weight: bolder;
+    }
 }
 input {
     flex: 1;
